@@ -29,7 +29,7 @@
         this.my= e.clientY;
         this.divx=parseFloat(window.getComputedStyle(box,null)["left"]||this.currentStyle["left"]);
         this.divy=parseFloat(window.getComputedStyle(box,null)["top"]||this.currentStyle["top"]);
-        if(this.setCapture){
+        if(this.setCapture){//防止鼠标丢失
             this.setCapture();
             this.onmousemove=move;
             this.onmouseup=up;
