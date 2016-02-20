@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box{width:100px;height:100px;margin:0 auto;margin-bottom:30px;border-radius:50px;box-shadow:0 0 10px #ccc;background: palegreen;text-align: center;line-height: 100px;animation: move 2s infinite;-webkit-animation: move 2s infinite;}
+        .box1{animation: move1 2s infinite;-webkit-animation: move1 2s infinite;}
+        .box2{animation: move2 2s infinite;-webkit-animation: move2 2s infinite;}
+        @keyframes move {
+            from{
+                transform: rotateZ(0deg);
+                -webkit-transform: rotateZ(0deg);
+            }
+            to{
+                transform: rotateZ(180deg);
+                -webkit-transform: rotateZ(180deg);
+            }
+        }
+        @keyframes move1 {
+            from{
+                transform: rotateX(0deg);
+                -webkit-transform: rotateX(0deg);
+            }
+            to{
+                transform: rotateX(180deg);
+                -webkit-transform: rotateX(180deg);
+            }
+        }
+        @keyframes move2 {
+            from{
+                transform: rotateY(0deg);
+                -webkit-transform: rotateY(0deg);
+            }
+            to{
+                transform: rotateY(180deg);
+                -webkit-transform: rotateY(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    翻转
+</div>
+<div class="box box1">
+    翻转
+</div>
+<div class="box box2">
+    翻转
+</div>
+</body>
+</html>

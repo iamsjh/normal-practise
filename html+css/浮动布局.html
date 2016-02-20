@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box{width: 960px;margin:0 auto;}
+        .div1,.div2,.div3,.div4,.div5,.div6,.div7{float:left;width: 280px;border: 2px solid #008000;margin-right: 10px;}
+        .div1{height:300px;}
+        .div2{height:100px;}
+        .div3{height:50px;}
+        .div4{height: 100px;}
+        .div5{height:100px;}
+        .div6{height:300px;}
+        .div7{height:100px;}
+    </style>
+</head>
+<body>
+<div class="box">
+    <!--浮动布局：破坏盒子的属性，使其不在普通的文档流中，所以文档的普通流中表现的像浮动框不存在一样，但是框里的文本内容会受到浮动元素的影响，会移动以留出空间，如图文环绕效果
+     浮动元素的包含块如果太窄，无法容纳水平排列的元素，那么其他浮动块就会向下移动，直到有足够的空间，如果浮动元素的高度不同，那么当他们向下移动的时候就可能会被其他浮动元素卡住，如下图示。
+    -->
+    <div class="div1">1</div>
+    <div class="div2">2</div>
+    <div class="div3">3</div>
+    <div class="div4">4</div>
+    <div class="div5">5</div>
+    <div class="div6">6</div>
+    <div class="div7">7</div>
+</div>
+</body>
+</html>
