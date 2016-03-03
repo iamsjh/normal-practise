@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body, div, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul:after, div:after {
+            display: block;
+            content: "";
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .content {
+            width: 600px;
+            margin: 10px auto 0;
+        }
+
+        .tab_head li {
+            float: left;
+            display: inline;
+            margin-right: 10px;
+            border: 1px solid #5c67ff;
+            padding: 0 10px;
+            background: palegoldenrod;
+            cursor: pointer;
+        }
+
+        .tab_head li.cur {
+            background: #FFCF78;
+        }
+
+        .tab_cnt_div {
+            display: none;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #5c67ff;
+            background: palegreen;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .tab_cnt_div.cur {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <ul class="tab_head" id="tab_head">
+        <li class="cur">1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <div class="tab_cnt" id="tab_cnt">
+        <div class="tab_cnt_div cur">1cnt</div>
+        <div class="tab_cnt_div">2cnt</div>
+        <div class="tab_cnt_div">3cnt</div>
+    </div>
+</div>
+<script src="//cdn.bootcss.com/jquery/1.4.4/jquery.min.js"></script>
+<script>
+   /* var tabHead = document.getElementById("tab_head"), tabCnt = document.getElementById("tab_cnt");
+    var tabHeadLi = tabHead.getElementsByTagName("li"), tabCntDiv = tabCnt.getElementsByTagName("div");
+    for (var i = 0; i < tabHeadLi.length; i++) {
+        var cur = tabHeadLi[i];
+        cur.index = i;
+        cur.onclick = function () {
+            for (var i = 0; i < tabCntDiv.length; i++) {
+                tabHeadLi[i].className = "";
+                tabCntDiv[i].className = "tab_cnt_div";
+            }
+            this.className = "cur";
+            tabCntDiv[this.index].className = "tab_cnt_div cur";
+        }
+    }*/
+
+    /*用jQuery的办法呢？*/
+    $(".tab_head li").click(function(){
+        var $index=$(this).index();
+        $(this).addClass("cur").siblings().removeClass("cur");
+        $(".tab_cnt div").each(function(index,item){
+            index==$index?$(item).show():$(item).hide();
+        })
+    })
+</script>
+</body>
+</html>
