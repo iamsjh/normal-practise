@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width"/>
+    <title></title>
+    <style>
+        #box{
+            display: none;
+            position: fixed;
+            left:50%;
+            top:50%;
+            //height:40px;
+            line-height: 40px;
+            padding:10px;
+            color:#fff;
+            background:rgba(0,0,0,0.5);
+            border-radius: 2px;
+            transform:translate(-50%,-50%);
+			white-space:nowrap;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    var box=document.getElementById("box");
+    box.innerHTML='这是一个水平居中的盒子';
+    box.style.display='block';
+    window.setTimeout(function(){
+        box.innerHTML="lajglajglajglajg;agja;";
+    },3000);
+    window.setTimeout(function(){
+        box.style.display='none';
+    },5000);
+    window.setTimeout(function(){
+        box.innerHTML="lajglajglajglajg;agja;gja;gja;gjag;j";
+        box.style.display='block';
+    },8000);
+</script>
+</body>
+</html>
