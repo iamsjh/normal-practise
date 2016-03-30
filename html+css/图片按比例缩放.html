@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>盒子的自适应</title>
+    <style>
+        html,body{width:100%;height:100%;}
+        body,div{margin:0;padding:0;}
+        .wrap{margin:20px;}
+        .box{position:relative;padding:25% 50%;background:#eee;}
+        .box-img{position:absolute;left:0;top:0;width:100%;height:100%;}
+    </style>
+</head>
+<body>
+<!--图片按比例缩放的代码
+   当margin 和padding 去百分比值时，其参照物都是以父元素的宽度来做的，这样当移动端需要按比例自适应布局时，就可以用此特性来实现。其子元素用absolute来定位到相应位置。
+   若用内容宽高度来撑的话，（如图片的宽度固定百分比，利用其高度来撑起盒子，由于图片的加载时需要时间的，当图片未加载时，盒子的高度为0 ，当图片加载了，则盒子高度才出现，会出现短暂的闪烁。-->
+<div class="wrap">
+    <div class="box">
+        <img class="box-img" src="http://img4.imgtn.bdimg.com/it/u=1220247882,2897676880&fm=21&gp=0.jpg" alt="from baidu.com"/>
+    </div>
+</div>
+</body>
+</html>
