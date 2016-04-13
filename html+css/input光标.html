@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>input光标</title>
+    <style>
+        body,div,input{margin:0;padding:0;}
+        input{display: block;border:none;}
+        .box{padding:10px;}
+        .box-input{box-sizing:border-box;width:100%;height:40px;border:1px solid #aaa;line-height:40px;font-size:14px;}
+        .box-input-2{box-sizing:border-box;width:100%;padding:10px 0;border:1px solid palegoldenrod;height:40px;line-height:14px;font-size:14px;}
+    </style>
+</head>
+<body>
+<!--input的光标有时候在浏览器中并不是上下居中的，当设置了line-height时，光标有时候在输入框没有文字时，是按照line-height来的，而在有文字时，是按照font-size来的，因此在查有不一致的情况时，设置下line-height的值就好，或者用padding-->
+<div class="box">
+    <h2>这是第一个input框</h2>
+    <input class='box-input' type="text" placeholder='如你所见，这是一个输入框'/>
+
+    <h2>这是第二个input框</h2>
+    <input type="text" class="box-input-2" placeholder="如你所见，这是第二个输入框"/>
+</div>
+</body>
+</html>

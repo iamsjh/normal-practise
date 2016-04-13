@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回到顶部</title>
+    <style>
+        .test-goback {
+            height: 3000px;
+            border: 2px solid palegreen;
+        }
+
+        .btn-goback {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            background: palegoldenrod;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="test-goback">
+    this is a box
+</div>
+<div class="btn-goback" id="btn-goback">
+    back
+</div>
+<script>
+    /*
+    * 回到顶部函数：用定时器模拟逐渐回到顶部的行为
+    * 当点击回到顶部后，防止因用户狂点而出现的频繁执行函数的行为
+    * document.documentELement.scrollTop||document.body.scrollTop,被频繁的获取数值和设置数值，应该封装一个函数
+    * */
+    var goback = document.getElementById('btn-goback');
+    goback.isscroll = true;
+    goback.onclick = function () {
+        if (this.isscroll) {
+            var that = this;
+            this.isscroll = false;
+            var duration = 5000, interval = 15;
+            var totalGo = document.documentElement.scrollTop || document.body.scrollTop;
+            var step = totalGo / duration * interval;
+            this.timer = window.setInterval(function () {
+                var posi = document.documentElement.scrollTop || document.body.scrollTop;
+                if (posi <= 0) {
+                    that.isscroll = true;
+                    window.clearInterval(that.timer);
+                    return;
+                }
+                document.documentElement.scrollTop =posi - step ;
+                document.body.scrollTop =posi - step ;
+            },interval);
+        }
+
+    };
+
+    function win(attr,val){''
+        if(typeof val==='undefined'){
+            return document.documentElement[attr]||document.body[attr];
+        }
+        document.documentElement[attr]=val;
+        document.body[attr]=val;
+    }
+
+</script>
+</body>
+</html>

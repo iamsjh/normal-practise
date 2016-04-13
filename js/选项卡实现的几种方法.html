@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训选项卡深入理解</title>
+    <link type="text/css" rel="stylesheet" href="css/tab.css"/>
+</head>
+<body>
+<div class="box">
+    <div class="banner" id="banner">
+        <div class="select"><img src="img/1_big.jpg"/></div>
+        <div><img src="img/2_big.jpg"/></div>
+        <div><img src="img/3_big.jpg"/></div>
+        <div><img src="img/4_big.jpg"/></div>
+        <div><img src="img/5_big.jpg"/></div>
+    </div>
+    <div class="bg"></div>
+    <ul class="tip" id="tip">
+        <li class="select"><span></span><img src="img/1.jpg"/></li>
+        <li><span></span><img src="img/2.jpg"/></li>
+        <li><span></span><img src="img/3.jpg"/></li>
+        <li><span></span><img src="img/4.jpg"/></li>
+        <li><span></span><img src="img/5.jpg"/></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    var banner = document.getElementById("banner");
+    var tip = document.getElementById("tip");
+    var oDivs = banner.getElementsByTagName("div");
+    var oLis = tip.getElementsByTagName("li");
+    //鼠标滑过某一个li,我们让所有的li和所有的div都没有选中的样式(select),然后让当前选中的这个li和对应的div有选中的样式
+    function changeTab(nIndex) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = null;
+            oDivs[i].className = null;
+        }
+        oLis[nIndex].className = "select";
+        oDivs[nIndex].className = "select";
+    }
+
+    /*
+    * 当绑定事件的时候，为了保存住当前的索引项，所以需要采用以下几种办法来实现
+    * 1、作用域式解决，形成一个不销毁的私有作用域，保存住私有变量i,弊端是会形成多个不销毁的私有作用域，占用内存
+    * 2、添加自定义属性，js中最常用的编程思想
+    * */
+    //1作用域式解决之利用自执行函数
+    /*for(var i=0; i<oLis.index; i++){
+        var cur=oLis[i];
+        (function(i){
+            cur.onclick=function(){
+                changeTab(i);
+            }
+        })(i);
+    }*/
+    //2作用域式解决之二
+    /*for(var i=0;i<oLis.index;i++){
+        var cur=oLis[i];
+        cur.onclick=function(i){
+            return function(){
+                changeTab(i);
+            }
+        }(i);
+    }*/
+    //3自定义属性解决
+    for(var i=0;i<oLis.length;i++){
+        var cur=oLis[i];
+        cur.index=i;
+        cur.onclick=function(){
+            changeTab(this.index);
+        }
+    }
+</script>
+</body>
+</html>
