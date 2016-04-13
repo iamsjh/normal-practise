@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--移动端前面必须加viewport-->
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <title>图片延迟加载</title>
+    <style type="text/css">
+        body, div, span, ul, li, h2, p {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        img {
+            border: none;
+        }
+
+        #newsList {
+            padding: 10px;
+        }
+
+        #newsList li {
+            position: relative;
+            padding: 10px 0;
+            height: 60px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        #newsList li img {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 75px;
+            height: 60px;
+        }
+
+        #newsList li div {
+            height: 60px;
+            margin-left: 80px;
+        }
+
+        #newsList li h2 {
+            height: 20px;
+            line-height: 20px;
+
+            /*当一行的内容超出的时候自动进行截取并且以...结束*/
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        #newsList li p {
+            height: 40px;
+            line-height: 20px;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<ul id="newsList">
+
+</ul>
+
+<script type="text/javascript">
+    var dataAry = [
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        },
+        {
+            logo: "https://img.alicdn.com/tps/i4/TB1GfaaKpXXXXX2XFXX.i829VXX-100-80.png_150x150.jpg_.webp",
+            title: "网络强国战略习近平与“十三五”十四大战略",
+            desc: "互联网是二十世纪人类最大的发明互联网是二十世纪."
+        }
+    ];
+    var newslist = document.getElementById('newsList');
+    var imglist = document.getElementsByTagName('img');
+    imgData();
+    function imgData() {
+        var str = '';
+        for (var i = 0; i < dataAry.length; i++) {
+            var cur = dataAry[i];
+            str += '<li>';
+            str += '<img src="img/default.jpg" trueImg="' + cur['logo'] + '"><div>';
+            str += '<h2>' + cur['title'] + '</h2>';
+            str += '<p>' + cur['desc'] + '</p></div>';
+            str += '</li>';
+        }
+        newslist.innerHTML += str;
+    }
+    function delayImg() {
+        for (var i = 0; i < imglist.length; i++) {
+            var cur = imglist[i];
+            if (!cur.isload) {
+                //判断，当图片出现的时候就加载真实图片
+                var imgTop = offset(cur).t + cur.offsetHeight;
+                var winTop = (document.documentElement.scrollTop || document.body.scrollTop) + (document.documentElement.clientHeight || document.body.clientHeight);
+                if (imgTop <= winTop) {
+                    delayImgCode(i);
+                }
+            }
+
+        }
+    }
+    function delayImgCode(index) {
+        //onload是异步的，因此需要保存index，用不销毁作用域的形式
+        ~function (index) {
+            var oImg = new Image;
+            var imgsrc = imglist[index].getAttribute('trueImg');
+            oImg.src = imgsrc;
+            oImg.onload = function () {
+                imglist[index].src = oImg.src;
+                oImg = null;
+                imglist[index].isload = true;
+            }
+        }(index);
+    }
+
+    function offset(curEle) {
+        var obj = {};
+        obj.l = curEle.offsetLeft, obj.t = curEle.offsetTop;
+        var p = curEle.offsetParent;
+        while (p.tagName.toLowerCase() !== 'body') {
+            if (navigator.userAgent.indexOf('MSIE 8.0') == -1) {
+                obj.l += p.clientLeft;
+                obj.t += p.clientTop;
+            }
+            obj.l += p.offsetLeft;
+            obj.t += p.offsetTop;
+            p = p.offsetParent;
+        }
+        return obj;
+    }
+    window.onscroll = delayImg;
+    window.onscroll();
+</script>
+</body>
+</html>
